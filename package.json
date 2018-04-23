@@ -1,0 +1,26 @@
+{
+  "name": "afflux-cli",
+  "version": "0.0.1",
+  "description": "",
+  "main": "cli.js",
+  "scripts": {
+    "start": "node cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vlad-yaremenko/afflux-cli.git"
+  },
+  "author": "Vlad Yaremenko",
+  "license": "ISC",
+  "bin": {
+    "afflux": "./cli.js"
+  },
+  "bugs": {
+    "url": "https://github.com/vlad-yaremenko/afflux-cli/issues"
+  },
+  "homepage": "https://github.com/vlad-yaremenko/afflux-cli#readme",
+  "dependencies": {
+    "commander": "^2.15.1",
+    "inquirer": "^5.2.0"
+  }
+}
