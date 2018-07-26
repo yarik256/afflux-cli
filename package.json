@@ -20,7 +20,11 @@
   },
   "homepage": "https://github.com/vlad-yaremenko/afflux-cli#readme",
   "dependencies": {
+    "@angular/cli": "^6.1.1",
     "commander": "^2.15.1",
-    "inquirer": "^5.2.0"
+    "execa": "^0.10.0",
+    "inquirer": "^5.2.0",
+    "listr": "^0.14.1",
+    "path": "^0.12.7"
   }
 }
