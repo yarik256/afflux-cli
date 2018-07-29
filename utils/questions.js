@@ -1,15 +1,13 @@
+const helper = require('./helpers');
+const validator = require('./validators');
+const projects = require('../project-types');
+
 module.exports = [{
   name: 'title',
   type: 'input',
   message: 'Project name:',
-  default: '',
-  validate (input) {
-    if (/^([A-Za-z\-\_\d])+$/.test(input)) {
-      return true;
-    } else {
-      return 'Project name may only include letters, numbers, underscores and hashes.';
-    }
-  }
+  default: helper.getCWD(),
+  validate: validator.title
 }, {
   name: 'description',
   type: 'input',
@@ -21,7 +19,7 @@ module.exports = [{
   message: 'Project type:',
   choices: [
     {name: 'Plain JS', value: 'plain-js'},
-    {name: 'Angular', value: 'angular'},
+    {name: 'Angular', value: projects.types.ANGULAR},
     {name: 'React', value: 'react'},
     {name: 'Vue', value: 'vue'},
     {name: 'Three.js', value: 'three'},
