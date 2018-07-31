@@ -1,20 +1,16 @@
-const Listr = require('listr');
+const inquirer = require('inquirer');
 const projects = require('./project-types');
+const questions = require('./utils/questions');
 
-require('inquirer').prompt(require('./utils/questions')).then((answers) => {
-  new Listr([
-    {
-      title: `Init ${answers.title} project`,
-      task: () => {
-        switch (answers.type) {
-          case projects.types.ANGULAR: {
-            return projects.angular(answers);
-          }
-          default: {
-            throw TypeError('Invalid project type!');
-          }
-        }
+module.exports = () => (
+  inquirer.prompt(questions).then((answers) => {
+    switch (answers.type) {
+      case projects.types.ANGULAR: {
+        return projects.angular(answers);
+      }
+      default: {
+        throw TypeError('Invalid project type!');
       }
     }
-  ]).run();
-});
+  })
+);
