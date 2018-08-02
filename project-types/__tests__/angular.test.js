@@ -1,69 +1,47 @@
 const projects = require('../../project-types');
-const config = require('../../config');
 
-const projectName = 'angular-project-test';
-// const projectPath = path.join(__dirname, `../${projectName}`);
-// const specPath = path.join(__dirname, '../specification/files/');
-
-jest.mock('@angular/cli');
 jest.mock('fs');
 
-// const projectFiles = {
-//   editorconfig: path.join(projectPath, '.editorconfig'),
-//   stylelintrc: path.join(projectPath, '.stylelintrc'),
-//   gitignore: path.join(projectPath, '.gitignore'),
-//   README: path.join(projectPath, 'README.md'),
-//   tslint: path.join(projectPath, 'tslint.json')
-// };
-//
-// const specFiles = {
-//   editorconfig: path.join(specPath, '.editorconfig'),
-//   stylelintrc: path.join(specPath, '.stylelintrc'),
-//   gitignore: path.join(specPath, '.gitignore'),
-//   tslint: path.join(specPath, 'tslint.json')
-// };
+describe('Generate angular project', () => {
+  const cli = require('@angular/cli');
+  const projectName = 'angular-project-test';
 
-describe('Create angular project', () => {
   test('can run angular cli', () => {
-    projects.angular({title: projectName}).then(({cliArgs}) => {
-      expect(cliArgs[0]).toBe('new');
-      expect(cliArgs[1]).toBe(projectName);
-      expect(cliArgs[2]).toBe('--style');
-      expect(cliArgs[3]).toBe(config.cssPreprocessor);
+    cli.default = jest.fn();
+
+    return projects.angular({title: projectName}).then(() => {
+      expect(cli.default).toHaveBeenCalled();
     });
   });
 
-  // describe('Check *lint', () => {
-  //   fileCopiedFromSpecification('tslint');
-  //
-  //   fileCopiedFromSpecification('stylelintrc');
-  // });
-  //
-  // describe('Check README.md file', () => {
-  //   test('file exists', () => {
-  //     expect(fs.existsSync(projectFiles.README)).toBeTruthy();
-  //   });
-  //
-  //   test('created by specification', () => {
-  //     expect(false).toBeTruthy();
-  //   });
-  // });
-  //
-  // fileCopiedFromSpecification('editorconfig');
-  //
-  // fileCopiedFromSpecification('gitignore');
-});
+  test('should throw an Error without "title" property', () => {
+    cli.default = jest.fn();
 
-// function fileCopiedFromSpecification(key) {
-//   describe(`Check ${key} file`, () => {
-//     test('file exists', () => {
-//       expect(fs.existsSync(projectFiles[key])).toBeTruthy();
-//     });
-//
-//     test('copied from specification', () => {
-//       fileCompare(projectFiles[key], specFiles[key], (res) => {
-//         expect(res).toBeTruthy();
-//       });
-//     });
-//   });
-// }
+    expect(projects.angular()).rejects.toThrow();
+    expect(cli.default).not.toHaveBeenCalled();
+  });
+
+  describe('should call', () => {
+    const specifier = require('../../utils/specifier');
+
+    beforeAll(() => {
+      specifier.copyGitignore = jest.fn();
+      specifier.copyEditorconfig = jest.fn();
+      specifier.copyStylelintrc = jest.fn();
+
+      return projects.angular({title: projectName});
+    });
+
+    test('copyGitignore with project title', () => {
+      expect(specifier.copyGitignore).toHaveBeenCalledWith(projectName);
+    });
+
+    test('copyEditorconfig with project title', () => {
+      expect(specifier.copyEditorconfig).toHaveBeenCalledWith(projectName);
+    });
+
+    test('copyStylelintrc with project title', () => {
+      expect(specifier.copyStylelintrc).toHaveBeenCalledWith(projectName);
+    });
+  });
+});
