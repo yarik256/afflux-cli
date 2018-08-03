@@ -21,9 +21,6 @@ module.exports = [{
     {name: 'Plain JS', value: 'plain-js'},
     {name: 'Angular', value: projects.types.ANGULAR},
     {name: 'React', value: 'react'},
-    {name: 'Vue', value: 'vue'},
-    {name: 'Three.js', value: 'three'},
-    {name: 'Chrome-extension', value: 'chrome_extension'},
-    {name: 'Mapbox', value: 'Mapbox'}
+    {name: 'Vue', value: 'vue'}
   ]
 }];

@@ -9,7 +9,7 @@ module.exports = () => (
         return projects.angular(answers);
       }
       default: {
-        throw TypeError('Invalid project type!');
+        return TypeError('Invalid project type!');
       }
     }
   })
