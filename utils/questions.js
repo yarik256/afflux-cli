@@ -18,9 +18,9 @@ module.exports = [{
   type: 'list',
   message: 'Project type:',
   choices: [
-    {name: 'Plain JS', value: 'plain-js'},
+    {name: 'Plain JS', value: projects.types.PLAIN},
     {name: 'Angular', value: projects.types.ANGULAR},
-    {name: 'React', value: 'react'},
-    {name: 'Vue', value: 'vue'}
+    {name: 'React', value: projects.types.REACT},
+    {name: 'Vue', value: projects.types.VUE}
   ]
 }];
