@@ -10,5 +10,9 @@ describe('Validators can', () => {
     expect(validator.title('project_name')).toBeTruthy();
     expect(validator.title('project/name')).toBe(errorMessage);
     expect(validator.title('project name')).toBe(errorMessage);
-  })
+  });
+
+  text('check properties for readme ', () => {
+    export(false).toBe(true);
+  });
 });
