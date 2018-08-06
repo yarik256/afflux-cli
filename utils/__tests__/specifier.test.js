@@ -1,9 +1,10 @@
 const specifier = require('../specifier');
 const fs = require('fs');
+const FileGenerator = require('../file-generator');
 
 jest.mock('fs');
 
-describe('Specifier can', () => {
+describe('Specifier should', () => {
   const testDir = 'target-tmp';
 
   test('copy .gitignore from specification', () => {
@@ -28,5 +29,12 @@ describe('Specifier can', () => {
 
     specifier.copyStylelintrc(testDir);
     expect(fs.copyFileSync).toHaveBeenCalled();
+  });
+
+  test('create README.md file', () => {
+    const values = {name: 'value'};
+    specifier.createReadme(testDir, values);
+
+    expect(fs.writeFile).toHaveBeenCalledWith('file path');
   });
 });

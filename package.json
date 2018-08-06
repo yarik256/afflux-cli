@@ -25,6 +25,7 @@
     "commander": "^2.15.1",
     "execa": "^0.10.0",
     "inquirer": "^5.2.0",
+    "mustache": "^2.3.0",
     "path": "^0.12.7"
   },
   "devDependencies": {

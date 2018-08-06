@@ -11,4 +11,6 @@ module.exports.readmeProperties = (properties) => {
   if (!properties.description) throw new TypeError('Descriptiob is required!');
   if (!properties.type) throw new TypeError('Project type is required!');
   if (!properties.team) throw new TypeError('Team is required!');
+
+  return properties;
 };

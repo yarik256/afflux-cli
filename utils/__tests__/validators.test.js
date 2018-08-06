@@ -12,7 +12,7 @@ describe('Validators can', () => {
     expect(validator.title('project name')).toBe(errorMessage);
   });
 
-  text('check properties for readme ', () => {
+  text('check required properties for readme ', () => {
     export(false).toBe(true);
   });
 });

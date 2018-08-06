@@ -16,6 +16,4 @@ module.exports = async ({title}) => {
   specifier.copyGitignore(title);
   specifier.copyEditorconfig(title);
   specifier.copyStylelintrc(title);
-
-  return;
 };
