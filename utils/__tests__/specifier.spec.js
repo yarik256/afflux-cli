@@ -1,10 +1,13 @@
 const specifier = require('../specifier');
 const fs = require('fs');
+const path = require('path');
 const FileGenerator = require('../file-generator');
+const helpers = require('../helpers');
 
 jest.mock('fs');
+jest.mock('../file-generator');
 
-describe('Specifier should', () => {
+describe('Specifier should copy', () => {
   const testDir = 'target-tmp';
 
   test('copy .gitignore from specification', () => {
@@ -32,9 +35,15 @@ describe('Specifier should', () => {
   });
 
   test('create README.md file', () => {
-    const values = {name: 'value'};
-    specifier.createReadme(testDir, values);
+    const mockFile = 'test.fl';
+    helpers.getReadmeTemplate = jest.fn(() => mockFile);
 
-    expect(fs.writeFile).toHaveBeenCalledWith('file path');
+    const values = {name: 'value'};
+    specifier.createReadme(values, testDir);
+
+    expect(FileGenerator).toHaveBeenCalledWith(mockFile, values);
+
+    const instance = FileGenerator.mock.instances[0];
+    expect(instance.create).toHaveBeenCalledWith('README.md', testDir);
   });
 });

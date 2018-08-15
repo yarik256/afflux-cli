@@ -15,10 +15,17 @@ class FileGenerator {
     return this.text;
   }
 
-  async create(fileName) {
+  create(fileName, path) {
     if (!fileName) throw new Error('File name is required!');
+    if (!path) throw new Error('Path is required!');
 
-    // TODO: Create file
+    return new Promise((resolve, reject) => {
+      fs.writeFile(path.join(path, fileName), this.text, 'utf8', (err) => {
+        if (err) reject(err);
+
+        resolve();
+      });
+    });
   }
 }
 

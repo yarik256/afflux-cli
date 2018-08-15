@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const FileGenerator = require('./file-generator');
-const getReadmeTemplate = require('./helpers').getReadmeTemplate;
+const helpers = require('./helpers');
 
 module.exports.copyGitignore = function (to) {
   if (!to) throw new Error('Target directory is required!');
@@ -31,6 +31,6 @@ module.exports.copyStylelintrc = function (to) {
 };
 
 module.exports.createReadme = function (values, to) {
-  console.log(getReadmeTemplate());
-  new FileGenerator(getReadmeTemplate(), values).create('README.md');
+  const file = new FileGenerator(helpers.getReadmeTemplate(), values);
+  file.create('README.md', to);
 };

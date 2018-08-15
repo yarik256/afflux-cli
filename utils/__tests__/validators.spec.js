@@ -12,7 +12,20 @@ describe('Validators can', () => {
     expect(validator.title('project name')).toBe(errorMessage);
   });
 
-  text('check required properties for readme ', () => {
-    export(false).toBe(true);
+  test('check required properties for readme ', () => {
+    const properties = {
+      title: 'title',
+      type: 'type'
+    };
+
+    expect(validator.readmeProperties).toThrowError(new TypeError('Properties is required!'));
+
+    const titleCopy = {...properties};
+    delete titleCopy.title;
+    expect(() => validator.readmeProperties(titleCopy)).toThrowError(new TypeError('Title is required!'));
+
+    const typeCopy = {...properties};
+    delete typeCopy.type;
+    expect(() => validator.readmeProperties(typeCopy)).toThrowError(new TypeError('Project type is required!'));
   });
 });

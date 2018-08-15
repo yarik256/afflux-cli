@@ -7,10 +7,9 @@ module.exports.title = (input) => {
 };
 
 module.exports.readmeProperties = (properties) => {
+  if (!properties) throw new TypeError('Properties is required!');
   if (!properties.title) throw new TypeError('Title is required!');
-  if (!properties.description) throw new TypeError('Descriptiob is required!');
   if (!properties.type) throw new TypeError('Project type is required!');
-  if (!properties.team) throw new TypeError('Team is required!');
 
   return properties;
 };
