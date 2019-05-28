@@ -4,7 +4,7 @@ const questions = require('./utils/questions');
 
 module.exports = () => (
   inquirer.prompt(questions).then((answers) => {
-    switch (answers.type) {
+    switch (answers && answers.type) {
       case projects.types.PLAIN: {
         return projects.plain(answers);
       }

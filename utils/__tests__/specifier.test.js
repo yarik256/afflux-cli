@@ -2,6 +2,7 @@ const specifier = require('../specifier');
 const fs = require('fs');
 
 jest.mock('fs');
+jest.mock('../helpers');
 
 describe('Specifier can', () => {
   const testDir = 'target-tmp';

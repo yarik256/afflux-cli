@@ -13,9 +13,9 @@ module.exports = async ({title}) => {
     throw new Error('Angular CLI was fell', e);
   }
 
-  specifier.copyGitignore(title);
+  specifier.angular.editAngularJson(title);
+  specifier.angular.copyDotHtaccess(title);
+  specifier.angular.copyTsconfig(title);
   specifier.copyEditorconfig(title);
   specifier.copyStylelintrc(title);
-
-  return;
 };

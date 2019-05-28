@@ -4,10 +4,12 @@ jest.mock('fs');
 
 describe('Generate angular project', () => {
   const cli = require('@angular/cli');
+  const specifier = require('../../utils/specifier');
   const projectName = 'angular-project-test';
 
   test('can run angular cli', () => {
     cli.default = jest.fn();
+    specifier.angular.editAngularJson = jest.fn();
 
     return projects.angular({title: projectName}).then(() => {
       expect(cli.default).toHaveBeenCalled();
@@ -22,18 +24,26 @@ describe('Generate angular project', () => {
   });
 
   describe('should call', () => {
-    const specifier = require('../../utils/specifier');
-
     beforeAll(() => {
-      specifier.copyGitignore = jest.fn();
+      specifier.angular.editAngularJson = jest.fn();
+      specifier.angular.copyDotHtaccess = jest.fn();
+      specifier.angular.copyTsconfig = jest.fn();
       specifier.copyEditorconfig = jest.fn();
       specifier.copyStylelintrc = jest.fn();
 
       return projects.angular({title: projectName});
     });
 
-    test('copyGitignore with project title', () => {
-      expect(specifier.copyGitignore).toHaveBeenCalledWith(projectName);
+    test('editAngularJson with with project title', () => {
+      expect(specifier.angular.editAngularJson).toHaveBeenCalledWith(projectName);
+    });
+
+    test('copyAngularDotHtaccess with project title', () => {
+      expect(specifier.angular.copyDotHtaccess).toHaveBeenCalledWith(projectName);
+    });
+
+    test('copyAngularTsconfig with project title', () => {
+      expect(specifier.angular.copyTsconfig).toHaveBeenCalledWith(projectName);
     });
 
     test('copyEditorconfig with project title', () => {
