@@ -1,10 +1,16 @@
-const inquirer = require('inquirer');
-const projects = require('./project-types');
-const questions = require('./utils/questions');
+import * as inquirer from 'inquirer';
+import * as projects from './project-types';
+import { questions } from './utils/questions';
 
-module.exports = () => (
-  inquirer.prompt(questions).then((answers) => {
-    switch (answers.type) {
+interface Answer {
+  title: string,
+  description: string,
+  type: string
+}
+
+export default () => {
+  return inquirer.prompt(questions).then((answers: Answer) => {
+    switch (answers && answers.type) {
       case projects.types.PLAIN: {
         return projects.plain(answers);
       }
@@ -22,4 +28,4 @@ module.exports = () => (
       }
     }
   })
-);
+};
