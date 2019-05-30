@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+const { copySync } = require('fs-extra');
+
+(function () {
+  const modules = ['specification', 'codebase'];
+
+  for (const module of modules) {
+    copySync(
+      `src/${module}`,
+      `dist/${module}`,
+      {
+        filter(name) {
+          return !/\/\.git\/|(\/\.git$)/.test(name);
+        }
+      }
+    );
+  }
+
+})();
