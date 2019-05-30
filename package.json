@@ -4,8 +4,8 @@
   "description": "",
   "main": "dist/main.js",
   "scripts": {
-    "postinstall": "git submodule update && npm run build",
-    "build": "rimraf dist && tsc && node bin/copy-modules",
+    "postinstall": "npm run build",
+    "build": "rimraf dist && node bin/copy-modules && tsc",
     "start": "node dist/main.js",
     "dev": "nodemon -e ts --watch src --exec npm run build",
     "test": "jest --watch",
