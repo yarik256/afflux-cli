@@ -1,3 +1,4 @@
 export default {
-  cssPreprocessor: 'scss'
+  cssPreprocessor: 'scss',
+  skipGit: true
 };
