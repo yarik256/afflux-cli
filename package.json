@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/main.js",
   "scripts": {
-    "postinstall": "git submodule update && npm run build",
+    "postinstall": "npm run build",
     "build": "rimraf dist && tsc && node bin/copy-modules",
     "start": "node dist/main.js",
     "dev": "nodemon -e ts --watch src --exec npm run build",
