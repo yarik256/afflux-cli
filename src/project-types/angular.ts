@@ -9,7 +9,7 @@ export const angular = ({title} = {title: ''}) => {
 
   const cliArgs = ['new', title, '--style', config.cssPreprocessor];
 
-  exec(`npx @angular/cli ${cliArgs.join(' ')}`,(error) => {
+  exec(`npx @angular/cli@7 ${cliArgs.join(' ')}`,(error) => {
     if (error) {
       throw new Error(`Angular CLI was fell ${error}`);
     }
