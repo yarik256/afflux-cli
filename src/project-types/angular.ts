@@ -14,7 +14,6 @@ export const angular = ({title} = {title: ''}) => {
     specifier.angular.copyBaseStructure(title);
     specifier.copyEditorconfig(title);
     specifier.copyStylelintrc(title);
-    specifier.copyStylelintrc(title);
   }, (e) => {
     throw new Error(`Angular CLI was fell ${e}`);
   });
