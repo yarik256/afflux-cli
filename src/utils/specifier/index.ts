@@ -1,6 +1,6 @@
 import { copyFileSync, readJsonSync, writeJsonSync } from 'fs-extra';
 import { join } from 'path';
-import { execSync } from 'child_process';
+import { exec } from 'child_process';
 
 export { angular } from './angular';
 
@@ -40,16 +40,20 @@ export function copyStylelintrc (to) {
     'stylelint-z-index-value-constraint'
   ];
 
-  execSync(`npm i ${modules.join(' ')}`, {cwd: join(to)});
+  exec(`npm i ${modules.join(' ')}`, {cwd: join(to)}, (error) => {
+    if (error) {
+      throw new Error(`Angular CLI was fell ${error}`);
+    }
 
-  const packageJson = readJsonSync( join(to, 'package.json') );
+    const packageJson = readJsonSync( join(to, 'package.json') );
 
-  packageJson.scripts['lint:scss'] = 'stylelint --syntax scss "./src/**/*.scss"';
+    packageJson.scripts['lint:scss'] = 'stylelint --syntax scss "./src/**/*.scss"';
 
-  writeJsonSync( join(to, 'package.json'), packageJson, { spaces: 2 } );
+    writeJsonSync( join(to, 'package.json'), packageJson, { spaces: 2 } );
 
-  copyFileSync(
-    join(__dirname, '../../specification/files/.stylelintrc'),
-    join(to, '.stylelintrc')
-  );
+    copyFileSync(
+      join(__dirname, '../../specification/files/.stylelintrc'),
+      join(to, '.stylelintrc')
+    );
+  }).stdout.pipe(process.stdout);
 }
