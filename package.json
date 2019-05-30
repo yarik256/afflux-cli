@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/main.js",
   "scripts": {
-    "postinstall": "npm i && npm run build",
+    "postinstall": "npm run build",
     "build": "rimraf dist && tsc && node bin/copy-modules",
     "start": "node dist/main.js",
     "dev": "nodemon -e ts --watch src --exec npm run build",
@@ -29,9 +29,7 @@
     "fs-extra": "^8.0.1",
     "inquirer": "^5.2.0",
     "path": "^0.12.7",
-    "save-dev": "^2.0.0"
-  },
-  "devDependencies": {
+    "save-dev": "^2.0.0",
     "@types/fs-extra": "^7.0.0",
     "@types/inquirer": "^6.0.3",
     "@types/jest": "^24.0.13",
