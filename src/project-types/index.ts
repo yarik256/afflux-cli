@@ -1,4 +1,10 @@
-export const types = {
+import { ProjectType } from "@src/main";
+
+interface Types {
+  [key: string]: ProjectType
+}
+
+export const types: Types = {
   PLAIN: 'plain-js',
   ANGULAR: 'angular',
   REACT: 'react',

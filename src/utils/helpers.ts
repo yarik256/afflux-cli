@@ -1,14 +1,14 @@
 import { sep } from "path";
 
-export function getCWD() {
+export function getCWD(): string {
   return process.cwd().split(sep).pop()
 }
 
-export function isObject(item) {
+export function isObject(item: any): boolean {
   return !!(item && typeof item === 'object' && !Array.isArray(item));
 }
 
-export function deepMerge(target, ...sources) {
+export function deepMerge(target: object, ...sources: object[]): object {
   if (!sources.length) {
     return target;
   }

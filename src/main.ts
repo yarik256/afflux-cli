@@ -2,14 +2,16 @@ import * as inquirer from 'inquirer';
 import * as projects from './project-types';
 import { questions } from './utils/questions';
 
-interface Answer {
+export type ProjectType = 'plain-js' | 'angular' | 'react' | 'vue';
+
+export interface Answer {
   title: string,
   description: string,
-  type: string
+  type: ProjectType
 }
 
-export default () => {
-  return inquirer.prompt(questions).then((answers: Answer) => {
+export default (): Promise<void | TypeError> => {
+  return inquirer.prompt(questions).then((answers: Answer): void | TypeError => {
     switch (answers && answers.type) {
       case projects.types.PLAIN: {
         return projects.plain(answers);
